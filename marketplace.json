@@ -1,0 +1,45 @@
+{
+  "name": "release-flow-docs",
+  "version": "0.1.0",
+  "description": "Music distributor agent skills: release-flow docs sync + backend scaffold",
+  "description_i18n": {
+    "en": "Music distributor agent skills: release-flow docs sync + backend scaffold",
+    "ru": "Agent skills для музыкальных дистрибьюторов: синхронизация docs по потоку релиза и scaffold бэкенда"
+  },
+  "owner": {
+    "name": "devochkaskustikom",
+    "url": "https://github.com/devochkaskustikom"
+  },
+  "plugins": [
+    {
+      "name": "release-flow-docs",
+      "source": "./",
+      "version": "0.1.0",
+      "description": "Adaptive docs sync (User → Release → Moderation → Admin) and local Adonis/Nest API scaffold for music distributors.",
+      "description_i18n": {
+        "en": "Adaptive docs sync (User → Release → Moderation → Admin) and local Adonis/Nest API scaffold for music distributors.",
+        "ru": "Адаптивная синхронизация документации (User → Release → Moderation → Admin) и локальный scaffold API на Adonis/Nest для музыкальных дистрибьюторов."
+      },
+      "displayName": "Release Flow Docs",
+      "displayName_i18n": {
+        "en": "Release Flow Docs",
+        "ru": "Release Flow Docs"
+      },
+      "author": {
+        "name": "devochkaskustikom",
+        "url": "https://github.com/devochkaskustikom"
+      },
+      "homepage": "https://github.com/devochkaskustikom/release-flow-docs",
+      "category": "developer-tools",
+      "keywords": [
+        "music-distribution",
+        "moderation",
+        "documentation",
+        "scaffold",
+        "ddex",
+        "nestjs",
+        "adonisjs"
+      ]
+    }
+  ]
+}

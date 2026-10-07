@@ -1,30 +1,66 @@
 # release-flow-docs
 
-Agent skill for **music / release-distribution** products:
+Agent skill / plugin for **music / release-distribution** products:
 
 1. **Docs sync** — keep documentation truthful against the live  
    **User → Release → Moderation → Admin → Release (delivery)** path.
 2. **Backend scaffold** — generate a local API skeleton for stages **S1–S6** with user-chosen framework (Adonis \| Nest), database (MariaDB 11 \| PostgreSQL), and file storage (local \| S3-compatible).
 
-The skill is **adaptive**: it discovers each repository’s layout. WE.DROP / dealmedia is a **depth exemplar** only (`references/exemplar-wedrop.md`) — never copy its fees, ISRC prefixes, payment providers, or hostnames into another product.
+The skill is **adaptive**: it discovers each repository’s layout. WE.DROP / dealmedia is a **depth exemplar** only (`skills/release-flow-docs/references/exemplar-wedrop.md`) — never copy its fees, ISRC prefixes, payment providers, or hostnames into another product.
 
 ## Install
 
-Clone into a skills discovery path (pick one):
+### A. Bare skill (any Agent Skills host)
+
+Works with ZCode, Claude Code, Cursor, Codex, OpenCode, and similar clients that scan `~/.agents/skills/`:
 
 ```bash
-# User-wide (recommended)
-git clone https://github.com/devochkaskustikom/release-flow-docs.git \
-  ~/.agents/skills/release-flow-docs
-
-# Or project-local
-git clone https://github.com/devochkaskustikom/release-flow-docs.git \
-  .agents/skills/release-flow-docs
+git clone https://github.com/devochkaskustikom/release-flow-docs.git /tmp/release-flow-docs
+mkdir -p ~/.agents/skills
+cp -R /tmp/release-flow-docs/skills/release-flow-docs ~/.agents/skills/release-flow-docs
 ```
 
-On Windows (Git Bash / PowerShell), `~` is your user home. Restart or reload the agent so it rediscovers skills.
+Or sparse-checkout only the skill folder:
 
-Directory name must stay `release-flow-docs` (matches frontmatter `name`).
+```bash
+git clone --depth 1 --filter=blob:none --sparse \
+  https://github.com/devochkaskustikom/release-flow-docs.git
+cd release-flow-docs
+git sparse-checkout set skills/release-flow-docs
+mkdir -p ~/.agents/skills
+cp -R skills/release-flow-docs ~/.agents/skills/release-flow-docs
+```
+
+Project-local alternative: copy into `<repo>/.agents/skills/release-flow-docs/`.
+
+Restart or reload the agent so it rediscovers skills. Directory name must stay `release-flow-docs` (matches frontmatter `name`).
+
+### B. Claude Code — plugin marketplace
+
+This repo is a Claude Code plugin marketplace (`.claude-plugin/marketplace.json`).
+
+```text
+/plugin marketplace add devochkaskustikom/release-flow-docs
+/plugin install release-flow-docs@release-flow-docs
+```
+
+Then mention `/release-flow-docs` or ask for release-flow docs sync / distributor API scaffold.
+
+### C. ZCode — Personal Plugin Marketplace
+
+1. Clone the repo somewhere stable, e.g. `~/plugins/release-flow-docs`.
+2. Open **Plugin Marketplace → Add → Add Plugin Marketplace**.
+3. Paste the **repo root** (the folder that contains `marketplace.json`).
+4. Open **Personal → release-flow-docs → Release Flow Docs → Install**.
+5. New task → pick the skill in the composer / `/` Skills menu.
+
+Manifest: `.zcode-plugin/plugin.json` (`skills: ./skills`). Root `marketplace.json` is the ZCode catalog; Claude’s catalog lives under `.claude-plugin/marketplace.json`.
+
+### D. Official catalogs (later)
+
+- **Claude Plugins Official** — submit via [plugin directory form](https://clau.de/plugin-directory-submission) after the plugin is stable.
+- **ZCode Official** — curated CDN marketplace; not a public PR. Use Personal market until listed.
+- **awesome-agent-skills / officialskills.sh** — PR only after real community usage (they reject brand-new skills).
 
 ## When it triggers
 
@@ -46,26 +82,34 @@ Load via `/release-flow-docs` or natural language, for example:
 ## Layout
 
 ```text
-release-flow-docs/
-├── SKILL.md                         # entrypoint (name + description + modes)
+release-flow-docs/                    # git / plugin / marketplace root
 ├── README.md
 ├── LICENSE
-├── references/
-│   ├── discovery.md                 # RepoProfile probing
-│   ├── flow-map.md                  # S1–S10 audit prompts
-│   ├── doc-inventory.md             # ownership patterns
-│   ├── workflow-contract.md         # CreateWorkflow for docs sync
-│   ├── scaffold-backend.md          # scaffold orchestrator + workers
-│   └── exemplar-wedrop.md           # WE.DROP depth checklist (not defaults)
-└── assets/
-    ├── finding-example.md
-    └── scaffold-brief-example.md
+├── marketplace.json                  # ZCode Personal market catalog
+├── .claude-plugin/
+│   ├── plugin.json                   # Claude Code plugin manifest
+│   └── marketplace.json              # Claude Code marketplace catalog
+├── .zcode-plugin/
+│   └── plugin.json                   # ZCode plugin manifest
+└── skills/
+    └── release-flow-docs/            # Agent Skill (SKILL.md + refs)
+        ├── SKILL.md
+        ├── references/
+        │   ├── discovery.md
+        │   ├── flow-map.md
+        │   ├── doc-inventory.md
+        │   ├── workflow-contract.md
+        │   ├── scaffold-backend.md
+        │   └── exemplar-wedrop.md
+        └── assets/
+            ├── finding-example.md
+            └── scaffold-brief-example.md
 ```
 
 ## Requirements
 
-- An agent host that loads skills from `.agents/skills/` or `~/.agents/skills/` (e.g. ZCode).
-- Full docs sync: `dynamic-workflows` skill available for `CreateWorkflow`.
+- An agent host that loads skills from `.agents/skills/` / plugin skill roots (e.g. ZCode, Claude Code).
+- Full docs sync: `dynamic-workflows` (or equivalent CreateWorkflow) available.
 - Scaffold: Agent tool + `AskUserQuestion` for stack choices.
 
 ## Non-negotiables (summary)

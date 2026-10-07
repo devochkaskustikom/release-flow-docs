@@ -1,0 +1,22 @@
+{
+  "name": "release-flow-docs",
+  "version": "0.1.0",
+  "description": "Adaptive agent skill for music / release-distribution products: audit and sync docs against User → Release → Moderation → Admin → Delivery, and scaffold a local Adonis or Nest API (MariaDB 11 or Postgres, local or S3-compatible storage) for stages S1–S6.",
+  "author": {
+    "name": "devochkaskustikom",
+    "url": "https://github.com/devochkaskustikom"
+  },
+  "homepage": "https://github.com/devochkaskustikom/release-flow-docs",
+  "license": "MIT",
+  "keywords": [
+    "music-distribution",
+    "moderation",
+    "ddex",
+    "documentation",
+    "scaffold",
+    "nestjs",
+    "adonisjs",
+    "agent-skills"
+  ],
+  "skills": "./skills"
+}
