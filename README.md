@@ -56,12 +56,6 @@ Then mention `/release-flow-docs` or ask for release-flow docs sync / distributo
 
 Manifest: `.zcode-plugin/plugin.json` (`skills: ./skills`). Root `marketplace.json` is the ZCode catalog; Claude’s catalog lives under `.claude-plugin/marketplace.json`.
 
-### D. Official catalogs (later)
-
-- **Claude Plugins Official** — submit via [plugin directory form](https://clau.de/plugin-directory-submission) after the plugin is stable.
-- **ZCode Official** — curated CDN marketplace; not a public PR. Use Personal market until listed.
-- **awesome-agent-skills / officialskills.sh** — PR only after real community usage (they reject brand-new skills).
-
 ## When it triggers
 
 Load via `/release-flow-docs` or natural language, for example:
